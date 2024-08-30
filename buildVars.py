@@ -25,7 +25,7 @@ addon_info = {
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
 	"addon_description": _("Complemento para obtener información sobre las GPU NVIDIA"),
 	# version
-	"addon_version": "1.0",
+	"addon_version": "0.1",
 	# Author(s)
 	"addon_author": "José Pérez <perezhuancajose@gmail.com> y ayoub <ayoubelbak13@gmail.com>",
 	# URL for the add-on documentation support
@@ -68,7 +68,7 @@ excludedFiles = []
 # Base language for the NVDA add-on
 # If your add-on is written in a language other than english, modify this variable.
 # For example, set baseLanguage to "es" if your add-on is primarily written in spanish.
-baseLanguage = "en"
+baseLanguage = "es"
 
 # Markdown extensions for add-on documentation
 # Most add-ons do not require additional Markdown extensions.
