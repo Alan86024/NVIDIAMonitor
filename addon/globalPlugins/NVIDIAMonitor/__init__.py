@@ -32,63 +32,63 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         )
         ui.message(resultado.stdout)
 
-    @script(description="Anuncia la carga de la GPU", gesture="kb:NVDA+alt+1")
+    @script(description="Anuncia la carga de la GPU", gesture="kb:NVDA+alt+1",category=script_category)
     def script_carga(self,gesture):
         resultado = subprocess.run(
             [self.ruta, "carga"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
         )
         ui.message(resultado.stdout)
 
-    @script(description="Anuncia la memoria libre",gesture="kb:NVDA+alt+2")
+    @script(description="Anuncia la memoria libre",gesture="kb:NVDA+alt+2",category=script_category)
     def script_memoria_libre(self,gesture):
         resultado = subprocess.run(
             [self.ruta, "memoria_libre"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
         )
         ui.message(resultado.stdout)
 
-    @script(description="Anuncia la memoria utilizada",gesture="kb:NVDA+alt+3")
+    @script(description="Anuncia la memoria utilizada",gesture="kb:NVDA+alt+3",category=script_category)
     def script_memoria_usada(self,gesture):
         resultado = subprocess.run(
             [self.ruta, "memoria_usada"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
         )
         ui.message(resultado.stdout)
 
-    @script(description="Anuncia la memoria total",gesture="kb:NVDA+alt+4")
+    @script(description="Anuncia la memoria total",gesture="kb:NVDA+alt+4",category=script_category)
     def script_memoria_total(self,gesture):
         resultado = subprocess.run(
             [self.ruta, "memoria_total"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
         )
         ui.message(resultado.stdout)
 
-    @script("Anuncia la temperatura",gesture="kb:NVDA+alt+5")
+    @script("Anuncia la temperatura",gesture="kb:NVDA+alt+5", category=script_category)
     def script_temperatura(self,gesture):
         resultado = subprocess.run(
             [self.ruta, "temperatura"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
         )
         ui.message(resultado.stdout)
 
-    @script(description="Anuncia el consumo de energía",gesture="kb:NVDA+alt+6")
+    @script(description="Anuncia el consumo de energía",gesture="kb:NVDA+alt+6", category=script_category)
     def script_consumo(self,gesture):
         resultado = subprocess.run(
             [self.ruta, "consumo_energia"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
         )
         ui.message(resultado.stdout)
 
-    @script(description="Anuncia la velocidad del ventilador",gesture="kb:NVDA+alt+7")
+    @script(description="Anuncia la velocidad del ventilador",gesture="kb:NVDA+alt+7", category=script_category)
     def script_ventilador(self,gesture):
         resultado = subprocess.run(
             [self.ruta, "velocidad_ventilador"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
         )
         ui.message(resultado.stdout)
 
-    @script(description="Anuncia la cantidad de procesos cuda", gesture="kb:NVDA+alt+8")
+    @script(description="Anuncia la cantidad de procesos cuda", gesture="kb:NVDA+alt+8", category=script_category)
     def script_cudas(self,gesture):
         resultado = subprocess.run(
             [self.ruta, "procesos_cuda"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
         )
         ui.message(resultado.stdout)
 
-    @script(description="Frecuencia reloj", gesture="kb:NVDA+alt+9")
+    @script(description="Frecuencia reloj", gesture="kb:NVDA+alt+9",category=script_category)
     def script_frecuencia(self,gesture):
         resultado = subprocess.run(
             [self.ruta, "frecuencia_reloj"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
