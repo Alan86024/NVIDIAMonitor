@@ -1,23 +1,21 @@
-# Nvidia Monitor
+# NVIDIA Monitor
 
 Este complemento permite realizar un seguimiento de varios parámetros de las tarjetas gráficas NVIDIA, tales como el nombre, memoria utilizada, memoria disponible y total, consumo, temperatura, entre otros.
 
-## Forma de uso
+## Atajos
 
-Los gestos de entrada predeterminados son los siguientes:
+Nota: todos los siguientes atajos se pueden personalizar en los gestos de entrada categoría NVDIAMonitor
 
-- NVDA + Alt + G: Nombre de la tarjeta gráfica.
-- NVDA + Alt + 1: Carga de la GPU.
+- NVDA + Alt + G: Anuncia el nombre/modelo de la tarjeta gráfica.
+- NVDA + Alt + 1: Anuncia la carga de la GPU.
 - NVDA + Alt + 2: Memoria disponible.
 - NVDA + Alt + 3: Memoria utilizada.
 - NVDA + Alt + 4: Memoria total.
-- NVDA + Alt + 5: Temperatura.
-- NVDA + Alt + 6: Consumo.
-- NVDA + Alt + 7: Velocidad de los ventiladores.
-- NVDA + Alt + 8: Procesos CUDA.
-- NVDA + Alt + 9: Frecuencia del reloj.
-
-Los gestos son modificables en la categoría del complemento en Gestos de entrada.
+- NVDA + Alt + 5: Anuncia la temperatura de la GPU.
+- NVDA + Alt + 6: Anuncia el consumo de la GPU (en vatios).
+- NVDA + Alt + 7: Anuncia la velocidad de los ventiladores.
+- NVDA + Alt + 8: Anuncia la cantidad de procesos CUDA.
+- NVDA + Alt + 9: Anuncia la frecuencia del reloj.
 
 ## Registro de cambios
 
