@@ -1,7 +1,7 @@
 script/env
 script/build
 addon/doc/*.css
-addon/doc/en/
+addon/doc/es/
 *_docHandler.py
 *.html
 manifest.ini
