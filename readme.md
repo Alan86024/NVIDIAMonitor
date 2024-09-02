@@ -12,7 +12,7 @@ Nota: todos los siguientes atajos se pueden personalizar en los gestos de entrad
 - NVDA + Alt + 3: Memoria utilizada.
 - NVDA + Alt + 4: Memoria total.
 - NVDA + Alt + 5: Anuncia la temperatura de la GPU.
-- NVDA + Alt + 6: Anuncia el consumo de la GPU (en vatios).
+- NVDA + Alt + 6: Anuncia el consumo de la GPU.
 - NVDA + Alt + 7: Anuncia la velocidad de los ventiladores.
 - NVDA + Alt + 8: Anuncia la cantidad de procesos CUDA.
 - NVDA + Alt + 9: Anuncia la frecuencia del reloj.
