@@ -43,7 +43,7 @@ def get_gpu_info(info_type):
 
         elif info_type == "velocidad_ventilador":
             fan_speed = pynvml.nvmlDeviceGetFanSpeed(handle)
-            return f"Velocidad de la ventilación del GPU: {fan_speed}%"
+            return f"Velocidad de la ventilación de la GPU: {fan_speed}%"
 
         elif info_type == "procesos_cuda":
             cuda_processes = pynvml.nvmlDeviceGetComputeRunningProcesses(handle)
@@ -53,7 +53,7 @@ def get_gpu_info(info_type):
             clock_graphics_current = pynvml.nvmlDeviceGetClockInfo(
                 handle, pynvml.NVML_CLOCK_GRAPHICS
             )
-            return f"Frecuencia reloj: {clock_graphics_current} MHz"
+            return f"Frecuencia del reloj: {clock_graphics_current} MHz"
 
         else:
             return "Tipo de información no válido"
