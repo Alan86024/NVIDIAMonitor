@@ -38,7 +38,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 resultado = subprocess.run(
                     [self.ruta, "nombre"],check=True ,capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
                 )
-                api.copyToClip(resultado.stdout)
+                api.copyToClip(resultado.stdout,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -54,7 +54,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 resultado = subprocess.run(
                     [self.ruta, "carga"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
                 )
-                api.copyToClip(resultado.stdout)
+                api.copyToClip(resultado.stdout,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -70,7 +70,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 resultado = subprocess.run(
                     [self.ruta, "memoria_libre"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
                 )
-                api.copyToClip(resultado.stdout)
+                api.copyToClip(resultado.stdout,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -86,7 +86,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 resultado = subprocess.run(
                     [self.ruta, "memoria_usada"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
                 )
-                api.copyToClip(resultado.stdout)
+                api.copyToClip(resultado.stdout,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -102,7 +102,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 resultado = subprocess.run(
                     [self.ruta, "memoria_total"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
                 )
-                api.copyToClip(resultado.stdout)
+                api.copyToClip(resultado.stdout,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -118,7 +118,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 resultado = subprocess.run(
                     [self.ruta, "temperatura"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
                 )
-                api.copyToClip(resultado.stdout)
+                api.copyToClip(resultado.stdout,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -134,7 +134,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 resultado = subprocess.run(
                     [self.ruta, "consumo_energia"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
                 )
-                api.copyToClip(resultado.stdout)
+                api.copyToClip(resultado.stdout,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -150,7 +150,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 resultado = subprocess.run(
                     [self.ruta, "velocidad_ventilador"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
                 )
-                api.copyToClip(resultado.stdout)
+                api.copyToClip(resultado.stdout,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -166,7 +166,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 resultado = subprocess.run(
                     [self.ruta, "procesos_cuda"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
                 )
-                api.copyToClip(resultado.stdout)
+                api.copyToClip(resultado.stdout,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -182,6 +182,6 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 resultado = subprocess.run(
                     [self.ruta, "frecuencia_reloj"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
                 )
-                api.copyToClip(resultado.stdout)
+                api.copyToClip(resultado.stdout,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
