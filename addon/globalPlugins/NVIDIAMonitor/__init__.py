@@ -25,8 +25,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 
     script_category="NVIDIAMonitor"
+    script_descripcion="Si se pulsa por segunda vez copia esta información al portapapeles."
 
-    @script(description="Anuncia el nombre de la GPU", gesture="kb:NVDA+alt+g",category=script_category)
+    @script(description=f"Anuncia el nombre de la GPU. {script_descripcion}", gesture="kb:NVDA+alt+g",category=script_category)
     def script_nombre_grafica(self, gesture):
         try:
             if getLastScriptRepeatCount() ==0:
@@ -42,7 +43,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
-    @script(description="Anuncia la carga de la GPU", gesture="kb:NVDA+alt+1",category=script_category)
+    @script(description=f"Anuncia la carga de la GPU. {script_descripcion}", gesture="kb:NVDA+alt+1",category=script_category)
     def script_carga(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
@@ -58,7 +59,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
-    @script(description="Anuncia la memoria libre",gesture="kb:NVDA+alt+2",category=script_category)
+    @script(description=f"Anuncia la memoria libre. {script_descripcion}",gesture="kb:NVDA+alt+2",category=script_category)
     def script_memoria_libre(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
@@ -74,7 +75,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
-    @script(description="Anuncia la memoria utilizada",gesture="kb:NVDA+alt+3",category=script_category)
+    @script(description=f"Anuncia la memoria utilizada. {script_descripcion}",gesture="kb:NVDA+alt+3",category=script_category)
     def script_memoria_usada(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
@@ -90,7 +91,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
-    @script(description="Anuncia la memoria total",gesture="kb:NVDA+alt+4",category=script_category)
+    @script(description=f"Anuncia la memoria total. {script_descripcion}",gesture="kb:NVDA+alt+4",category=script_category)
     def script_memoria_total(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
@@ -106,7 +107,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
-    @script("Anuncia la temperatura",gesture="kb:NVDA+alt+5", category=script_category)
+    @script(description=f"Anuncia la temperatura. {script_descripcion}",gesture="kb:NVDA+alt+5", category=script_category)
     def script_temperatura(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
@@ -122,7 +123,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
-    @script(description="Anuncia el consumo de energía",gesture="kb:NVDA+alt+6", category=script_category)
+    @script(description=f"Anuncia el consumo de energía. {script_descripcion}",gesture="kb:NVDA+alt+6", category=script_category)
     def script_consumo(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
@@ -138,7 +139,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
-    @script(description="Anuncia la velocidad del ventilador",gesture="kb:NVDA+alt+7", category=script_category)
+    @script(description=f"Anuncia la velocidad del ventilador. {script_descripcion}",gesture="kb:NVDA+alt+7", category=script_category)
     def script_ventilador(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
@@ -154,7 +155,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
-    @script(description="Anuncia la cantidad de procesos cuda", gesture="kb:NVDA+alt+8", category=script_category)
+    @script(description=f"Anuncia la cantidad de procesos cuda. {script_descripcion}", gesture="kb:NVDA+alt+8", category=script_category)
     def script_cudas(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
@@ -170,7 +171,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
-    @script(description="Anuncia la frecuencia del reloj", gesture="kb:NVDA+alt+9",category=script_category)
+    @script(description=f"Anuncia la frecuencia del reloj. {script_descripcion}", gesture="kb:NVDA+alt+9",category=script_category)
     def script_frecuencia(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
