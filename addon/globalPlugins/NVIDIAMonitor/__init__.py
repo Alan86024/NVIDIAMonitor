@@ -25,7 +25,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 
     script_category="NVIDIAMonitor"
-    script_descripcion="Si se pulsa por segunda vez copia esta información al portapapeles."
+    script_descripcion="Si se pulsa dos veces, copia esta información al portapapeles."
 
     @script(description=f"Anuncia el nombre de la GPU. {script_descripcion}", gesture="kb:NVDA+alt+g",category=script_category)
     def script_nombre_grafica(self, gesture):
