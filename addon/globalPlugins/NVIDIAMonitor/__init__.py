@@ -37,21 +37,23 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     script_category=_("NVIDIAMonitor")
     script_descripcion=_("Si se pulsa dos veces, copia esta información al portapapeles.")
 
+    def ejecutar_comando(self,comando):
+        resultado=subprocess.run(
+            [self.ruta, comando],check=True ,capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
+        )
+        return resultado.stdout
+
 
     #For translators
     @script(description=_(f"Anuncia el nombre de la GPU. {script_descripcion}"), gesture="kb:NVDA+alt+g",category=script_category)
     def script_nombre_grafica(self, gesture):
         try:
             if getLastScriptRepeatCount() ==0:
-                resultado = subprocess.run(
-                    [self.ruta, "nombre"],check=True ,capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                ui.message(resultado.stdout)
+                resultado=self.ejecutar_comando("nombre")
+                ui.message(resultado)
             else:
-                resultado = subprocess.run(
-                    [self.ruta, "nombre"],check=True ,capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                api.copyToClip(resultado.stdout,notify=True)
+                resultado=self.ejecutar_comando("nombre")
+                api.copyToClip(resultado,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -61,15 +63,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_carga(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
-                resultado = subprocess.run(
-                    [self.ruta, "carga"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                ui.message(resultado.stdout)
+                resultado=self.ejecutar_comando("carga")
+                ui.message(resultado)
             else:
-                resultado = subprocess.run(
-                    [self.ruta, "carga"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                api.copyToClip(resultado.stdout,notify=True)
+                resultado=self.ejecutar_comando("carga")
+                api.copyToClip(resultado,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -79,15 +77,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_memoria_libre(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
-                resultado = subprocess.run(
-                    [self.ruta, "memoria_libre"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                ui.message(resultado.stdout)
+                resultado=self.ejecutar_comando("memoria_libre")
+                ui.message(resultado)
             else:
-                resultado = subprocess.run(
-                    [self.ruta, "memoria_libre"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                api.copyToClip(resultado.stdout,notify=True)
+                resultado=self.ejecutar_comando("memoria_libre")
+                api.copyToClip(resultado,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -97,15 +91,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_memoria_usada(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
-                resultado = subprocess.run(
-                    [self.ruta, "memoria_usada"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                ui.message(resultado.stdout)
+                resultado=self.ejecutar_comando("memoria_usada")
+                ui.message(resultado)
             else:
-                resultado = subprocess.run(
-                    [self.ruta, "memoria_usada"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                api.copyToClip(resultado.stdout,notify=True)
+                resultado=self.ejecutar_comando("memoria_usada")
+                api.copyToClip(resultado,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -115,15 +105,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_memoria_total(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
-                resultado = subprocess.run(
-                    [self.ruta, "memoria_total"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                ui.message(resultado.stdout)
+                resultado=self.ejecutar_comando("memoria_total")
+                ui.message(resultado)
             else:
-                resultado = subprocess.run(
-                    [self.ruta, "memoria_total"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                api.copyToClip(resultado.stdout,notify=True)
+                resultado=self.ejecutar_comando("memoria_total")
+                api.copyToClip(resultado,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -133,15 +119,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_temperatura(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
-                resultado = subprocess.run(
-                    [self.ruta, "temperatura"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                ui.message(resultado.stdout)
+                resultado=self.ejecutar_comando("temperatura")
+                ui.message(resultado)
             else:
-                resultado = subprocess.run(
-                    [self.ruta, "temperatura"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                api.copyToClip(resultado.stdout,notify=True)
+                resultado=self.ejecutar_comando("temperatura")
+                api.copyToClip(resultado,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -151,15 +133,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_consumo(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
-                resultado = subprocess.run(
-                    [self.ruta, "consumo_energia"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                ui.message(resultado.stdout)
+                resultado=self.ejecutar_comando("consumo_energia")
+                ui.message(resultado)
             else:
-                resultado = subprocess.run(
-                    [self.ruta, "consumo_energia"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                api.copyToClip(resultado.stdout,notify=True)
+                resultado=self.ejecutar_comando("consumo_energia")
+                api.copyToClip(resultado,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -169,15 +147,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_ventilador(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
-                resultado = subprocess.run(
-                    [self.ruta, "velocidad_ventilador"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                ui.message(resultado.stdout)
+                resultado=self.ejecutar_comando("velocidad_ventilador")
+                ui.message(resultado)
             else:
-                resultado = subprocess.run(
-                    [self.ruta, "velocidad_ventilador"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                api.copyToClip(resultado.stdout,notify=True)
+                resultado=self.ejecutar_comando("velocidad_ventilador")
+                api.copyToClip(resultado,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -187,15 +161,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_cudas(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
-                resultado = subprocess.run(
-                    [self.ruta, "procesos_cuda"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                ui.message(resultado.stdout)
+                resultado=self.ejecutar_comando("procesos_cuda")
+                ui.message(resultado)
             else:
-                resultado = subprocess.run(
-                    [self.ruta, "procesos_cuda"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                api.copyToClip(resultado.stdout,notify=True)
+                resultado=self.ejecutar_comando("procesos_cuda")
+                api.copyToClip(resultado,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
 
@@ -205,14 +175,10 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_frecuencia(self,gesture):
         try:
             if getLastScriptRepeatCount() ==0:
-                resultado = subprocess.run(
-                    [self.ruta, "frecuencia_reloj"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                ui.message(resultado.stdout)
+                resultado=self.ejecutar_comando("frecuencia_reloj")
+                ui.message(resultado)
             else:
-                resultado = subprocess.run(
-                    [self.ruta, "frecuencia_reloj"], check=True, capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                api.copyToClip(resultado.stdout,notify=True)
+                resultado=self.ejecutar_comando("frecuencia_reloj")
+                api.copyToClip(resultado,notify=True)
         except Exception as e:
             ui.message("Ocurrió un error al obtener información sobre la GPU")
