@@ -29,9 +29,9 @@ addon_info = {
 	# Author(s)
 	"addon_author": "José Pérez <perezhuancajose@gmail.com> y ayoub <ayoubelbak13@gmail.com>",
 	# URL for the add-on documentation support
-	"addon_url": None,
+	"addon_url": "https://github.com/JosePerezHuanca/NVIDIAMonitor",
 	# URL for the add-on repository where the source code can be found
-	"addon_sourceURL": None,
+	"addon_sourceURL": "https://github.com/JosePerezHuanca/NVIDIAMonitor",
 	# Documentation file name
 	"addon_docFileName": "readme.html",
 	# Minimum NVDA version supported (e.g. "2018.3.0", minor version is optional)
