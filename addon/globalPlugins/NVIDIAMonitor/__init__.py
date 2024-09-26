@@ -11,6 +11,7 @@ import subprocess
 import globalVars
 import api
 import winVersion
+import time
 import addonHandler
 from logHandler import log
 
@@ -33,6 +34,8 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def __init__(self):
         super(GlobalPlugin, self).__init__()
         self.ruta = os.path.join(os.path.dirname(__file__), "scriptNvidia", "script.exe")
+        self.resultados_cache={}
+        self.cache_expiracion=3
 
 
     #For translators
@@ -40,10 +43,17 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     script_descripcion=_("Si se pulsa dos veces, copia esta información al portapapeles.")
 
     def ejecutar_comando(self,comando):
+        tiempo_actual=time.time()
+        if comando in self.resultados_cache:
+            resultado, tiempo_marca=self.resultados_cache[comando]
+            if tiempo_actual - tiempo_marca < self.cache_expiracion:
+                return resultado
+        
         try:
             resultado=subprocess.run(
                 [self.ruta, comando],check=True ,capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
             )
+            self.resultados_cache[comando]=resultado.stdout, tiempo_actual
             return resultado.stdout
         except subprocess.CalledProcessError as e:
             return f"Error: {e.returncode} {e.cmd}"
