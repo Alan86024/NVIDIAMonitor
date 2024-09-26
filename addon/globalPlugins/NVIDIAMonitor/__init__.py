@@ -10,8 +10,10 @@ import os
 import subprocess
 import globalVars
 import api
+import winVersion
 import addonHandler
 from logHandler import log
+
 
 #For translators
 try:
@@ -38,147 +40,158 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     script_descripcion=_("Si se pulsa dos veces, copia esta información al portapapeles.")
 
     def ejecutar_comando(self,comando):
-        resultado=subprocess.run(
-            [self.ruta, comando],check=True ,capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-        )
-        return resultado.stdout
+        try:
+            resultado=subprocess.run(
+                [self.ruta, comando],check=True ,capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
+            )
+            return resultado.stdout
+        except subprocess.CalledProcessError as e:
+            return f"Error: {e.returncode} {e.cmd}"
 
 
     #For translators
     @script(description=_(f"Anuncia el nombre de la GPU. {script_descripcion}"), gesture="kb:NVDA+alt+g",category=script_category)
     def script_nombre_grafica(self, gesture):
-        try:
+        if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
                 resultado=self.ejecutar_comando("nombre")
                 ui.message(resultado)
             else:
                 resultado=self.ejecutar_comando("nombre")
                 api.copyToClip(resultado,notify=True)
-        except Exception as e:
-            ui.message("Ocurrió un error al obtener información sobre la GPU")
+        else:
+            ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
 
 
     #For translators
     @script(description=_(f"Anuncia la carga de la GPU. {script_descripcion}"), gesture="kb:NVDA+alt+1",category=script_category)
     def script_carga(self,gesture):
-        try:
+        if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
                 resultado=self.ejecutar_comando("carga")
                 ui.message(resultado)
             else:
                 resultado=self.ejecutar_comando("carga")
                 api.copyToClip(resultado,notify=True)
-        except Exception as e:
-            ui.message("Ocurrió un error al obtener información sobre la GPU")
+        else:
+            ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
+
 
 
     #For translators
     @script(description=_(f"Anuncia la memoria libre. {script_descripcion}"),gesture="kb:NVDA+alt+2",category=script_category)
     def script_memoria_libre(self,gesture):
-        try:
+        if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
                 resultado=self.ejecutar_comando("memoria_libre")
                 ui.message(resultado)
             else:
                 resultado=self.ejecutar_comando("memoria_libre")
                 api.copyToClip(resultado,notify=True)
-        except Exception as e:
-            ui.message("Ocurrió un error al obtener información sobre la GPU")
+        else:
+            ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
+
 
 
     #For translators
     @script(description=_(f"Anuncia la memoria utilizada. {script_descripcion}"),gesture="kb:NVDA+alt+3",category=script_category)
     def script_memoria_usada(self,gesture):
-        try:
+        if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
                 resultado=self.ejecutar_comando("memoria_usada")
                 ui.message(resultado)
             else:
                 resultado=self.ejecutar_comando("memoria_usada")
                 api.copyToClip(resultado,notify=True)
-        except Exception as e:
-            ui.message("Ocurrió un error al obtener información sobre la GPU")
+        else:
+            ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
+
 
 
     #For translators
     @script(description=_(f"Anuncia la memoria total. {script_descripcion}"),gesture="kb:NVDA+alt+4",category=script_category)
     def script_memoria_total(self,gesture):
-        try:
+        if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
                 resultado=self.ejecutar_comando("memoria_total")
                 ui.message(resultado)
             else:
                 resultado=self.ejecutar_comando("memoria_total")
                 api.copyToClip(resultado,notify=True)
-        except Exception as e:
-            ui.message("Ocurrió un error al obtener información sobre la GPU")
+        else:
+            ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
+
 
 
     #For translators
     @script(description=_(f"Anuncia la temperatura. {script_descripcion}"),gesture="kb:NVDA+alt+5", category=script_category)
     def script_temperatura(self,gesture):
-        try:
+        if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
                 resultado=self.ejecutar_comando("temperatura")
                 ui.message(resultado)
             else:
                 resultado=self.ejecutar_comando("temperatura")
                 api.copyToClip(resultado,notify=True)
-        except Exception as e:
-            ui.message("Ocurrió un error al obtener información sobre la GPU")
+        else:
+            ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
+
 
 
     #For translators
     @script(description=_(f"Anuncia el consumo de energía. {script_descripcion}"),gesture="kb:NVDA+alt+6", category=script_category)
     def script_consumo(self,gesture):
-        try:
+        if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
                 resultado=self.ejecutar_comando("consumo_energia")
                 ui.message(resultado)
             else:
                 resultado=self.ejecutar_comando("consumo_energia")
                 api.copyToClip(resultado,notify=True)
-        except Exception as e:
-            ui.message("Ocurrió un error al obtener información sobre la GPU")
+        else:
+            ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
+
 
 
     #For translators
     @script(description=_(f"Anuncia la velocidad del ventilador. {script_descripcion}"),gesture="kb:NVDA+alt+7", category=script_category)
     def script_ventilador(self,gesture):
-        try:
+        if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
                 resultado=self.ejecutar_comando("velocidad_ventilador")
                 ui.message(resultado)
             else:
                 resultado=self.ejecutar_comando("velocidad_ventilador")
                 api.copyToClip(resultado,notify=True)
-        except Exception as e:
-            ui.message("Ocurrió un error al obtener información sobre la GPU")
+        else:
+            ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
+
 
 
     #For translators
     @script(description=_(f"Anuncia la cantidad de procesos cuda. {script_descripcion}"), gesture="kb:NVDA+alt+8", category=script_category)
     def script_cudas(self,gesture):
-        try:
+        if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
                 resultado=self.ejecutar_comando("procesos_cuda")
                 ui.message(resultado)
             else:
                 resultado=self.ejecutar_comando("procesos_cuda")
                 api.copyToClip(resultado,notify=True)
-        except Exception as e:
-            ui.message("Ocurrió un error al obtener información sobre la GPU")
+        else:
+            ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
+
 
 
     #For translators
     @script(description=_(f"Anuncia la frecuencia del reloj. {script_descripcion}"), gesture="kb:NVDA+alt+9",category=script_category)
     def script_frecuencia(self,gesture):
-        try:
+        if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
                 resultado=self.ejecutar_comando("frecuencia_reloj")
                 ui.message(resultado)
             else:
                 resultado=self.ejecutar_comando("frecuencia_reloj")
                 api.copyToClip(resultado,notify=True)
-        except Exception as e:
-            ui.message("Ocurrió un error al obtener información sobre la GPU")
+        else:
+            ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
