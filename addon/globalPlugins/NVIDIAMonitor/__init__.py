@@ -10,6 +10,7 @@ import os
 import subprocess
 import globalVars
 import api
+import threading
 import winVersion
 import time
 import addonHandler
@@ -42,21 +43,24 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     script_category=_("NVIDIAMonitor")
     script_descripcion=_("Si se pulsa dos veces, copia esta información al portapapeles.")
 
-    def ejecutar_comando(self,comando):
-        tiempo_actual=time.time()
-        if comando in self.resultados_cache:
-            resultado, tiempo_marca=self.resultados_cache[comando]
-            if tiempo_actual - tiempo_marca < self.cache_expiracion:
-                return resultado
-        
-        try:
-            resultado=subprocess.run(
-                [self.ruta, comando],check=True ,capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-            )
-            self.resultados_cache[comando]=resultado.stdout, tiempo_actual
-            return resultado.stdout
-        except subprocess.CalledProcessError as e:
-            return f"Error: {e.returncode} {e.cmd}"
+    def ejecutar_comando(self,comando,cb):
+        def comando_hilo():
+            tiempo_actual=time.time()
+            if comando in self.resultados_cache:
+                resultado, tiempo_marca=self.resultados_cache[comando]
+                if tiempo_actual - tiempo_marca < self.cache_expiracion:
+                    return cb(resultado)
+            
+            try:
+                resultado=subprocess.run(
+                    [self.ruta, comando],check=True ,capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
+                )
+                self.resultados_cache[comando]=resultado.stdout, tiempo_actual
+                return cb(resultado.stdout)
+            except subprocess.CalledProcessError as e:
+                return cb(f"Error: {e.returncode} {e.cmd}")
+        thread=threading.Thread(target=comando_hilo)
+        thread.start()
 
 
     #For translators
@@ -64,11 +68,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_nombre_grafica(self, gesture):
         if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
-                resultado=self.ejecutar_comando("nombre")
-                ui.message(resultado)
+                self.ejecutar_comando("nombre",ui.message)
             else:
-                resultado=self.ejecutar_comando("nombre")
-                api.copyToClip(resultado,notify=True)
+                self.ejecutar_comando("nombre",lambda resultado: api.copyToClip(resultado,notify=True))
         else:
             ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
 
@@ -78,11 +80,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_carga(self,gesture):
         if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
-                resultado=self.ejecutar_comando("carga")
-                ui.message(resultado)
+                self.ejecutar_comando("carga",ui.message)
             else:
-                resultado=self.ejecutar_comando("carga")
-                api.copyToClip(resultado,notify=True)
+                self.ejecutar_comando("carga",lambda resultado: api.copyToClip(resultado,notify=True))
         else:
             ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
 
@@ -93,11 +93,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_memoria_libre(self,gesture):
         if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
-                resultado=self.ejecutar_comando("memoria_libre")
-                ui.message(resultado)
+                self.ejecutar_comando("memoria_libre",ui.message)
             else:
-                resultado=self.ejecutar_comando("memoria_libre")
-                api.copyToClip(resultado,notify=True)
+                self.ejecutar_comando("memoria_libre",lambda resultado: api.copyToClip(resultado,notify=True))
         else:
             ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
 
@@ -108,11 +106,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_memoria_usada(self,gesture):
         if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
-                resultado=self.ejecutar_comando("memoria_usada")
-                ui.message(resultado)
+                self.ejecutar_comando("memoria_usada",ui.message)
             else:
-                resultado=self.ejecutar_comando("memoria_usada")
-                api.copyToClip(resultado,notify=True)
+                self.ejecutar_comando("memoria_usada",lambda resultado: api.copyToClip(resultado,notify=True))
         else:
             ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
 
@@ -123,11 +119,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_memoria_total(self,gesture):
         if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
-                resultado=self.ejecutar_comando("memoria_total")
-                ui.message(resultado)
+                self.ejecutar_comando("memoria_total",ui.message)
             else:
-                resultado=self.ejecutar_comando("memoria_total")
-                api.copyToClip(resultado,notify=True)
+                self.ejecutar_comando("memoria_total",lambda resultado: api.copyToClip(resultado,notify=True))
         else:
             ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
 
@@ -138,11 +132,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_temperatura(self,gesture):
         if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
-                resultado=self.ejecutar_comando("temperatura")
-                ui.message(resultado)
+                self.ejecutar_comando("temperatura",ui.message)
             else:
-                resultado=self.ejecutar_comando("temperatura")
-                api.copyToClip(resultado,notify=True)
+                self.ejecutar_comando("temperatura",lambda resultado: api.copyToClip(resultado,notify=True))
         else:
             ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
 
@@ -153,11 +145,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_consumo(self,gesture):
         if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
-                resultado=self.ejecutar_comando("consumo_energia")
-                ui.message(resultado)
+                self.ejecutar_comando("consumo_energia",ui.message)
             else:
-                resultado=self.ejecutar_comando("consumo_energia")
-                api.copyToClip(resultado,notify=True)
+                self.ejecutar_comando("consumo_energia",lambda resultado: api.copyToClip(resultado,notify=True))
         else:
             ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
 
@@ -168,11 +158,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_ventilador(self,gesture):
         if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
-                resultado=self.ejecutar_comando("velocidad_ventilador")
-                ui.message(resultado)
+                self.ejecutar_comando("velocidad_ventilador",ui.message)
             else:
-                resultado=self.ejecutar_comando("velocidad_ventilador")
-                api.copyToClip(resultado,notify=True)
+                self.ejecutar_comando("velocidad_ventilador",lambda resultado: api.copyToClip(resultado,notify=True))
         else:
             ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
 
@@ -183,11 +171,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_cudas(self,gesture):
         if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
-                resultado=self.ejecutar_comando("procesos_cuda")
-                ui.message(resultado)
+                self.ejecutar_comando("procesos_cuda",ui.message)
             else:
-                resultado=self.ejecutar_comando("procesos_cuda")
-                api.copyToClip(resultado,notify=True)
+                self.ejecutar_comando("procesos_cuda",lambda resultado: api.copyToClip(resultado,notify=True))
         else:
             ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
 
@@ -198,10 +184,8 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def script_frecuencia(self,gesture):
         if winVersion.getWinVer().processorArchitecture=="AMD64":
             if getLastScriptRepeatCount() ==0:
-                resultado=self.ejecutar_comando("frecuencia_reloj")
-                ui.message(resultado)
+                self.ejecutar_comando("frecuencia_reloj",ui.message)
             else:
-                resultado=self.ejecutar_comando("frecuencia_reloj")
-                api.copyToClip(resultado,notify=True)
+                resultado=self.ejecutar_comando("frecuencia_reloj",lambda resultado: api.copyToClip(resultado,notify=True))
         else:
             ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
