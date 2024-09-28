@@ -1,5 +1,4 @@
 script/env
-script/build
 addon/doc/*.css
 addon/doc/es/
 addon/doc/en/

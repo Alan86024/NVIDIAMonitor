@@ -1,2 +1,1 @@
 pynvml
-cx-Freeze
