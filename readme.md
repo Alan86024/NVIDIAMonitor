@@ -4,13 +4,13 @@ Este complemento permite realizar un seguimiento de varios parámetros de las ta
 
 ## Atajos
 
-Nota: todos los siguientes atajos se pueden personalizar en los gestos de entrada categoría NVDIAMonitor
+Nota: todos los siguientes atajos se pueden personalizar en los gestos de entrada, categoría NVDIAMonitor, si se pulsan 2 veces la información  se copia al portapapeles
 
 - NVDA + Alt + G: Anuncia el nombre/modelo de la tarjeta gráfica.
 - NVDA + Alt + 1: Anuncia la carga de la GPU.
-- NVDA + Alt + 2: Memoria disponible.
-- NVDA + Alt + 3: Memoria utilizada.
-- NVDA + Alt + 4: Memoria total.
+- NVDA + Alt + 2: Anuncia la memoria disponible.
+- NVDA + Alt + 3: Anuncia la memoria utilizada.
+- NVDA + Alt + 4: Anuncia la memoria total.
 - NVDA + Alt + 5: Anuncia la temperatura de la GPU.
 - NVDA + Alt + 6: Anuncia el consumo de la GPU.
 - NVDA + Alt + 7: Anuncia la velocidad de los ventiladores.

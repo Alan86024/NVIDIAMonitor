@@ -25,7 +25,7 @@ addon_info = {
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
 	"addon_description": _("Complemento para obtener información sobre las GPU NVIDIA"),
 	# version
-	"addon_version": "0.1",
+	"addon_version": "0.2",
 	# Author(s)
 	"addon_author": "José Pérez <perezhuancajose@gmail.com> y ayoub <ayoubelbak13@gmail.com>",
 	# URL for the add-on documentation support
