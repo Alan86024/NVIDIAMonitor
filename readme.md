@@ -19,11 +19,11 @@ Nota: todos los siguientes atajos se pueden personalizar en los gestos de entrad
 
 ## Registro de cambios
 
+### Versión 0.2
+
+- Ahora si se pulsa un atajo dos veces copia la información al portapapeles
+- Varias mejoras y obtimizaciones
+
 ### Versión 0.1
 
 - Versión inicial del complemento.
-
-### Versión 0.2
-
-- Añadida la opción de copiar al portapapeles la información
-- Obtimización de código
