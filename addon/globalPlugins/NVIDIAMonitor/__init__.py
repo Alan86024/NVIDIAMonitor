@@ -45,7 +45,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
     def ejecutar_comando(self,comando,cb):
         def comando_hilo():
-            tiempo_actual=time.time()
+            tiempo_actual=time.monotonic()
             if comando in self.resultados_cache:
                 resultado, tiempo_marca=self.resultados_cache[comando]
                 if tiempo_actual - tiempo_marca < self.cache_expiracion:
