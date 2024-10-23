@@ -1,2 +1,2 @@
 pynvml
-pyinstaller
+cx_Freeze
