@@ -6,13 +6,14 @@ Este script permite consultar varios parámetros de las tarjetas gráficas NVIDI
 
 - Python 3.11 o superior
 - pynvml
-- pyinstaller
+- cx_Freeze
 
 ## Cómo compilar
 
 Se recomienda utilizar un entorno virtual:
 - Instalar las dependencias: `pip install -r requirements.txt`
-- Compilar con: `pyinstaller --onefile script.py`
+- Compilar con: `python setup.py build`
+- Luego de compilar copiar el contenido de la carpeta build a addon/globalPlugins/NVIDIAMonitor. Se recomienda renombrar la carpeta que contiene el ejecutable a script
 
 ## Cómo utilizar
 
