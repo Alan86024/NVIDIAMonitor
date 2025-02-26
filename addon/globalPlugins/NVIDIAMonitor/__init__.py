@@ -13,6 +13,7 @@ import api
 import threading
 import winVersion
 import time
+import tones
 import addonHandler
 from logHandler import log
 
@@ -37,11 +38,24 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         self.ruta = os.path.join(os.path.dirname(__file__), "script", "script.exe")
         self.resultados_cache={}
         self.cache_expiracion=3
+        try:
+            self.proceso = subprocess.Popen(
+                [self.ruta],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                creationflags=subprocess.CREATE_NO_WINDOW
+            )
+        except subprocess.CalledProcessError as e:
+            log.error(f"Error al iniciar el proceso: {e.returncode} {e.cmd}")
+            self.proceso=None
 
 
     #For translators
     script_category=_("NVIDIAMonitor")
     script_descripcion=_("Si se pulsa dos veces, copia esta información al portapapeles.")
+
 
     def ejecutar_comando(self,comando,cb):
         def comando_hilo():
@@ -52,13 +66,18 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                     return cb(resultado)
             
             try:
-                resultado=subprocess.run(
-                    [self.ruta, comando],check=True ,capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-                )
-                self.resultados_cache[comando]=resultado.stdout, tiempo_actual
-                return cb(resultado.stdout)
-            except subprocess.CalledProcessError as e:
-                return cb(f"Error: {e.returncode} {e.cmd}")
+                self.proceso.stdin.write(f"{comando}\n")
+                self.proceso.stdin.flush()
+                resultado = self.proceso.stdout.readline()
+                if not resultado:
+                    log.error(f"No se recibió salida para el comando: {comando}")
+                    return cb("Error al recibir respuesta del proceso.")
+                # Guardar el resultado en la caché
+                self.resultados_cache[comando] = resultado, tiempo_actual
+                return cb(resultado)
+            except OSError as e:
+                log.error(f"Error al escribir en el subprocess: {e}")
+                return cb("Error al escribir en el proceso.")
         thread=threading.Thread(target=comando_hilo)
         thread.start()
 
@@ -189,3 +208,20 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 resultado=self.ejecutar_comando("frecuencia_reloj",lambda resultado: api.copyToClip(resultado,notify=True))
         else:
             ui.message(_("Error: la arquitectura de tu procesador no es compatible"))
+
+    def terminate(self):
+        if self.proceso:
+            try:
+                # Enviamos el comando de salida
+                self.proceso.stdin.write("exit\n")
+                self.proceso.stdin.flush()
+                # Terminar el proceso de manera controlada
+                self.proceso.terminate()
+                # Esperar a que termine completamente
+                self.proceso.wait() 
+                # Cerramos las conexiones de stdin, stdout, stderr
+                self.proceso.stdin.close()
+                self.proceso.stdout.close()
+                self.proceso.stderr.close()
+            except Exception as e:
+                pass
