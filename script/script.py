@@ -6,7 +6,7 @@ def get_gpu_info(info_type,handle):
     if info_type == "nombre":
         gpu_name = pynvml.nvmlDeviceGetName(handle)
         full_name = gpu_name.strip()
-        return f"GPU: {full_name}"
+        return f"Nombre: {full_name}"
 
     elif info_type=="uuid":
         return f"UUID: {pynvml.nvmlDeviceGetUUID(handle)}"
