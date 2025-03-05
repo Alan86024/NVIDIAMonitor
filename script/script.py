@@ -161,21 +161,21 @@ def get_gpu_info(info_type,handle):
         return f"Estado de energía: {descriptions.get(power_state, 'Desconocido')}"
 
     else:
-        return "Tipo de información no válido"
+        return "Tipo de información no válido"
 
 
 
 if __name__ == "__main__":
-    try:
-        pynvml.nvmlInit()
-        handle = pynvml.nvmlDeviceGetHandleByIndex(0)
-        while True:
-            user_input = input().strip().lower()
-            if user_input == "exit":
-                break
+    while True:
+        user_input = input().strip().lower()
+        if user_input == "exit":
+            break
+        try:
+            pynvml.nvmlInit()
+            handle = pynvml.nvmlDeviceGetHandleByIndex(0)
             result = get_gpu_info(user_input,handle)
             print(result)
-    except pynvml.NVMLError as e:
-        print(f"Error obteniendo la info: {str(e)}")
-    finally:
-        pynvml.nvmlShutdown()
+        except pynvml.NVMLError as e:
+            print(f"Error obteniendo la info: {str(e)}")
+        finally:
+            pynvml.nvmlShutdown()
