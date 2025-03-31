@@ -35,7 +35,7 @@ def disableInSecureMode(decoratedCls):
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def __init__(self):
         super(GlobalPlugin, self).__init__()
-        self.ruta = os.path.join(os.path.dirname(__file__), "script", "script.exe")
+        self.ruta = os.path.join(os.path.dirname(__file__), "data", "NVIDIAScript.exe")
         self.resultados_cache={}
         self.cache_expiracion=1
         try:
