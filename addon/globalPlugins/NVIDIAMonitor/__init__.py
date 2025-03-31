@@ -38,6 +38,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         self.ruta = os.path.join(os.path.dirname(__file__), "data", "NVIDIAScript.exe")
         self.resultados_cache={}
         self.cache_expiracion=1
+        self.runing=False
+        
+    def ejecutar_script(self):
         try:
             self.proceso = subprocess.Popen(
                 [self.ruta],
@@ -47,9 +50,12 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 text=True,
                 creationflags=subprocess.CREATE_NO_WINDOW
             )
+            self.runing=True
+            return self.proceso
         except subprocess.CalledProcessError as e:
-            log.error(f"Error al iniciar el proceso: {e.returncode} {e.cmd}")
             self.proceso=None
+            self.runing=False
+            return log.error(f"Error al iniciar el proceso: {e.returncode} {e.cmd}")
 
 
     #For translators
@@ -64,7 +70,8 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 resultado, tiempo_marca=self.resultados_cache[comando]
                 if tiempo_actual - tiempo_marca < self.cache_expiracion:
                     return cb(resultado)
-            
+            if not self.runing or self.proceso.poll() is not None:
+                self.ejecutar_script()
             try:
                 self.proceso.stdin.write(f"{comando}\n")
                 self.proceso.stdin.flush()
@@ -368,5 +375,6 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 self.proceso.stdin.close()
                 self.proceso.stdout.close()
                 self.proceso.stderr.close()
+                self.runing=False
             except Exception as e:
                 pass
