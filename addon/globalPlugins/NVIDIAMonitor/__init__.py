@@ -13,6 +13,7 @@ import api
 import threading
 import winVersion
 import time
+import datetime
 import tones
 import addonHandler
 from logHandler import log
@@ -38,8 +39,15 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         self.ruta = os.path.join(os.path.dirname(__file__), "data", "NVIDIAScript.exe")
         self.resultados_cache={}
         self.cache_expiracion=1
-        self.runing=False
-        
+        self.en_ejecucion=False
+
+    def escribir_log(self,mensaje):
+        ruta_log=os.path.join(globalVars.appArgs.configPath, "NVIDIAMonitor.log")
+        with open(ruta_log, "a") as f:
+            tiempo_actual=datetime.datetime.now()
+            tiempo_formato=tiempo_actual.strftime("%Y-%m-%d %H:%M")
+            f.write(f"{tiempo_formato} - {mensaje}\n")
+
     def ejecutar_script(self):
         try:
             self.proceso = subprocess.Popen(
@@ -50,12 +58,23 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 text=True,
                 creationflags=subprocess.CREATE_NO_WINDOW
             )
-            self.runing=True
+            self.en_ejecucion=True
+            return self.proceso
+        except FileNotFoundError as e:
+            self.en_ejecucion=False
+            error_ruta=f"Error: El archivo no se encuentra en la ruta especificada: {self.ruta}"
+            self.escribir_log(error_ruta)
+            log.error(error_ruta)
+            self.proceso=None
             return self.proceso
         except subprocess.CalledProcessError as e:
+            self.en_ejecucion=False
+            error_mensaje=f"Error al iniciar el proceso: {e.returncode} {e.cmd}"
+            self.escribir_log(error_mensaje)
+            log.error(error_mensaje)
             self.proceso=None
-            self.runing=False
-            return log.error(f"Error al iniciar el proceso: {e.returncode} {e.cmd}")
+            return self.proceso
+
 
 
     #For translators
@@ -70,20 +89,24 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 resultado, tiempo_marca=self.resultados_cache[comando]
                 if tiempo_actual - tiempo_marca < self.cache_expiracion:
                     return cb(resultado)
-            if not self.runing or self.proceso.poll() is not None:
+            if not self.en_ejecucion or self.proceso.poll() is not None:
                 self.ejecutar_script()
             try:
                 self.proceso.stdin.write(f"{comando}\n")
                 self.proceso.stdin.flush()
                 resultado = self.proceso.stdout.readline()
                 if not resultado:
-                    log.error(f"No se recibió salida para el comando: {comando}")
+                    error_resultado=f"No se recibió salida para el comando: {comando}"
+                    self.escribir_log(error_resultado)
+                    log.error(error_resultado)
                     return cb("Error al recibir respuesta del proceso.")
                 # Guardar el resultado en la caché
                 self.resultados_cache[comando] = resultado, tiempo_actual
                 return cb(resultado)
             except OSError as e:
-                log.error(f"Error al escribir en el subprocess: {e}")
+                error_proceso=f"Error al escribir en el subprocess: {e}"
+                self.escribir_log(error_proceso)
+                log.error(error_proceso)
                 return cb("Error al escribir en el proceso.")
         thread=threading.Thread(target=comando_hilo)
         thread.start()
@@ -375,6 +398,8 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                 self.proceso.stdin.close()
                 self.proceso.stdout.close()
                 self.proceso.stderr.close()
-                self.runing=False
+                self.en_ejecucion=False
             except Exception as e:
+                error_terminate=f"Error al intentar terminar el proceso: {str(e)}"
+                self.escribir_log(error_terminate)
                 pass
