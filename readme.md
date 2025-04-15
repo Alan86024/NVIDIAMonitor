@@ -35,9 +35,11 @@ Todos los siguientes atajos se pueden personalizar en los gestos de entrada/cate
 
 ## Registro de cambios
 
-### Versión 0.3
+### Versión 1.0
 
 - Se realizaron varios cambios, correcciones y mejoras en el script donde se obtiene la información.
+- Ahora si se produce un error se almacena en un archivo llamado NVIDIAMonitor.log el cual se encuentra en la carpeta de configuración de NVDA.
+- Compatibilidad con NVDA 2025.1
 - Se reasignaron algunos atajos existentes.
 - Nuevos atajos añadidos:
   - UUID de la GPU: NVDA + alt + u
