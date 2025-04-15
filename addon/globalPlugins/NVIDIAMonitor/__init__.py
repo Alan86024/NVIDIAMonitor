@@ -386,6 +386,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
     def terminate(self):
         if self.proceso:
+            if self.proceso.poll() is not None:
+                self.en_ejecucion=False
+                return
             try:
                 # Enviamos el comando de salida
                 self.proceso.stdin.write("exit\n")
