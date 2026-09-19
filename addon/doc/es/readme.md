@@ -35,6 +35,10 @@ Todos los siguientes atajos se pueden personalizar en los gestos de entrada/cate
 
 ## Registro de cambios
 
+### Versión 2.1
+
+- Se solucionó un problema con las llamadas directas a pynvml.
+
 ### Versión 2.0
 
 - Compatibilidad con NVDA 2026.1.
