@@ -5,7 +5,7 @@ This add-on allows you to monitor various parameters of NVIDIA graphics cards, s
 ## Shortcuts
 
 Note: Some information parameters may not be compatible or supported depending on the graphics card.
-All the following shortcuts can be customized in the input gestures/NVDIAMonitor category. Pressing a shortcut twice copies the information to the clipboard.
+All the following shortcuts can be customized in the input gestures/NVIDIAMonitor category. Pressing a shortcut twice copies the information to the clipboard.
 
 - NVDA + alt + g: Announces the GPU name/model.
 - NVDA + alt + u: Announces the GPU UUID.
@@ -34,6 +34,10 @@ All the following shortcuts can be customized in the input gestures/NVDIAMonitor
 
 
 ## Changelog
+
+### Version 2.1
+
+- Fixed a problem with direct pynvml calls.
 
 ### Version 2.0
 

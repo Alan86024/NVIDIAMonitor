@@ -5,7 +5,7 @@ Este complemento permite realizar un seguimiento de varios parámetros de las ta
 ## Atajos
 
 Nota: Algunos parámetros de información pueden no ser compatibles o estar soportados dependiendo de la tarjeta gráfica.
-Todos los siguientes atajos se pueden personalizar en los gestos de entrada/categoría NVDIAMonitor. Si se pulsan dos veces la información  se copia al portapapeles
+Todos los siguientes atajos se pueden personalizar en los gestos de entrada/categoría NVIDIAMonitor. Si se pulsan dos veces la información  se copia al portapapeles
 
 - NVDA + alt + g: Anuncia el nombre/modelo de la GPU.
 - NVDA + alt + u: Anuncia el UUID de la GPU.
